@@ -1,0 +1,170 @@
+{% include 'admin/partials/header' %}
+
+<style>
+    label.help-inline {
+        color:red;
+        font-size:12px;
+    }
+</style>
+
+<!-- start: Content -->
+<div id="content" class="col-sm-11">
+    <div class="box">
+        <div class="box-header">Add Menu</div>
+        <div class="box-content">
+            <form class="form-horizontal" action="admin/menu/post" method="post" id="MenuForm">
+                <div class="form-group">
+                    <label class="control-label" for="title">Title</label>
+                    <div class="controls">
+                        <input class="form-control" id="title" name="title" type="text" placeholder="Type in link title">
+                    </div>
+                </div>
+
+                <div style="width:45%; float:left;">
+                    <label class="control-label" for="page">Select Page</label>
+                    <div class="controls">
+                        <select class="form-control" name="page" id="page">
+                            <option value="">Select...</option>
+                            {% for p in pages %}
+                                <option value="{{ p.id }}">{{ p.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div style="width:10%; float:left; font-size:36px; text-align: center; margin-top:10px;">OR</div>
+                <div style="width:45%; float:left;">
+                    <label class="control-label" for="url">Type URL</label>
+                    <div class="controls">
+                        <input class="form-control" id="url" name="url" type="text">
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+<!-- end: Content -->
+
+
+</div>
+<!--/row-->
+</div>
+
+
+
+
+
+<div class="clearfix">
+</div>
+
+<footer>
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            &copy; 2014
+            <a href="https://musicequity.com">
+                Music Equity
+            </a>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-7 text-right">
+
+        </div>
+        <!--/.col-->
+
+    </div>
+    <!--/.row-->
+
+</footer>
+
+<!-- start: JavaScript-->
+<!--[if !IE]>
+-->
+
+<script src="assets/admin/js/jquery-2.1.0.min.js">
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script src="assets/admin/js/jquery-1.11.0.min.js">
+</script>
+
+<![endif]-->
+
+<!--[if !IE]>
+-->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+</script>
+
+<![endif]-->
+<script src="assets/admin/js/jquery-migrate-1.2.1.min.js">
+</script>
+<script src="assets/admin/js/bootstrap.min.js">
+</script>
+
+
+<!-- page scripts -->
+<script src="assets/admin/js/jquery-ui-1.10.3.custom.min.js">
+</script>
+
+
+<!-- theme scripts -->
+<script src="assets/admin/js/custom.min.js">
+</script>
+<script src="assets/admin/js/core.min.js">
+</script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+
+        $("#MenuForm").validate({
+            errorClass: "help-inline",
+            rules: {
+                title: {
+                    required: true
+                },
+                url: {
+                    required: true
+                }
+
+            }
+        });
+
+    });
+</script>
+
+<!-- end: JavaScript-->
+
+</body>
+</html>

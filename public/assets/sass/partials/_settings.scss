@@ -1,0 +1,33 @@
+// Colors
+
+$font-blue: #00c0ff;
+$font-blue-hover: #00A8E0;
+
+$font-light-header: #a5adc2;
+
+$font-form-color: #6d7ba2;
+
+$form-border-color: #adbcd4;
+
+$error-color: #DE3F62;
+
+// Icons
+
+$box-padding: 5px;
+$icon-height: me-icons-sprite-height(heart);
+$icon-width: me-icons-sprite-width(heart);
+
+
+// Font smoothing mixin
+
+@mixin font-smoothing($value: on) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+

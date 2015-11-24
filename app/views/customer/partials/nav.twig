@@ -1,0 +1,57 @@
+<div class="headerinner">
+    <div class="container">
+        <div class="row rowheader">
+            <div class="col-md-3 logoInner">
+                <a href="/"><img src="assets/images/logo_sm_in.png" alt="Music Equity"/></a>
+            </div>
+            <div class="col-md-9">
+                <div class="searchheader pull-left">
+                    <form action="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search track / artist / album">
+                         <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">
+                                  <span class="glyphicon glyphicon-search"></span>
+                              </button>
+                         </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="innermenu pull-right">
+                    <ul class="nav-menu list-inline">
+                        <li>
+                            <div class="menu-pill">
+                                <a href="{{ user.type }}/{{ user.profile_url }}">
+                                    {% if user.picture != 0 %}  <img src="/profile/picture/{{ user.picture }}/small"> {% endif %}
+                                    {% if user %}
+                                    {% if user.type == 'artist' or user.type == 'customer' %}
+                                    {% if user.name is empty %}user{{ user.profile_url }}
+                                    {% else %}
+                                        {{ user.name }}
+                                    {% endif %}</a>
+                                {% else %}
+                                    {% if user.charity.name is empty %}user{{ user.profile_url }}{% else %}{{ user.charity.name }}{% endif %}</a>
+                                {% endif %}
+                                {% else %}
+                                    <a href="/login">Sign In</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                        <img src="assets/images/menupixel.png" class="menu-sep">
+                        <li>
+                            <div class="menu-pill">
+                                <a href="#" id="dropdown-tg"><img class="bars" src="assets/images/bars.png"></a>
+                            </div>
+                            <ul class="dropdown">
+                                <li class="dropdown-item"><a href="/settings">Settings</a></li>
+                                <li class="dropdown-item"><a href="/signout">Sign Out</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

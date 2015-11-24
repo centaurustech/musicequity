@@ -1,0 +1,70 @@
+<div class="module">
+    <div class="moduletitle">
+        <span class="glyphicon glyphicon-user"></span> Artists Donated
+    </div>
+    <div class="modulecontent">
+
+        {% if wall | length == 0 %}
+        <div class="moduleitem">
+                No one donated to this charity yet
+        </div>
+        {% else %}
+        {% for a in wall|slice(0,2) %}
+        <div class="moduleitem">
+                    <div class="moduleart pull-left">
+                        <img src="/profile/picture/{{ a.author.picture }}/medium" style="height:50px; width:auto;">
+                    </div>
+                    <div class="moduleitemcontent pull-right">
+                        <div class="eventtitle">
+                            {{ a.author.artist_name }} <small>donated:</small>
+                        </div>
+                        <div class="eventlocation">
+                            {{ a.title }}
+                        </div>
+                        <div class="eventtime">
+                            <span class="glyphicon glyphicon-calendar"></span> {{ a.created_at }}
+                        </div>
+                    </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="module">
+    <div class="moduletitle">
+        <span class="glyphicon glyphicon-comment"></span> Latest Comments
+    </div>
+
+    <div class="modulecontent">
+
+        {% if comments | length == 0 %}
+            Noone left the feedback yet
+        {% else %}
+            {% for c in comments %}
+                <div class="modulecomment">
+                    <div class="commenttext pull-left">
+                        <div class="modulecommentauthor">
+                            {% if c.getinfo.type == 'artist' %}
+                                by <a href="/artist/{{ c.getinfo.profile_url }}">{{ c.getinfo.artist_name }}
+                            {% endif %}
+                            {% if c.getinfo.type == 'customer' %}
+                                by <a href="/c/{{ c.getinfo.profile_url }}">{{ c.getinfo.name }}
+                            {% endif %}
+                            {% if c.getinfo.type == 'charity' %}
+                                by <a href="/charity/{{ c.getinfo.profile_url }}">{{ c.getinfo.name }}
+                            {% endif %}
+                            </a>
+                        </div>
+                        <div class="modulecommentbody">
+                            {{ c.comment }}
+                        </div>
+                    </div>
+                    <div class="commentdate pull-right text-right">
+                        <span class="glyphicon glyphicon-calendar"></span> {{ c.created_at }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+</div>

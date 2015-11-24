@@ -1,0 +1,43 @@
+.form-group {
+  position: relative;
+}
+.form-control {
+  border-radius: 0px !important;
+  border-color: $form-border-color !important;
+  color: $font-form-color;
+  outline: none;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+label {
+  font-family: BlissProRegular;
+  font-weight: normal;
+}
+input {
+  @include font-smoothing(on);
+}
+input.error-input {
+  border:1px solid $error-color !important;
+}
+label.error-input {
+  position: absolute;
+  right:0;
+  top:0;
+  background-color: $error-color;
+  color: #f9f9f9;
+  padding:3px;
+}
+.helper {
+  position: absolute;
+  right: 5px;
+  bottom: 8px;
+}
+.tooltip{
+  .tooltip-inner {
+    width:150px;
+    text-align: center;
+    font-family: BlissProBold;
+    font-size: 12px;
+  }
+}

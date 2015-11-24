@@ -1,0 +1,155 @@
+{% include 'admin/partials/header' %}
+
+
+<!-- start: Content -->
+<div id="content" class="col-sm-11">
+    <div class="box">
+        <div class="box-header">Edit Page</div>
+        <div class="box-content">
+            <form class="form-horizontal" action="admin/page/edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" value="{{ page.id }}" name="page"/>
+                <div class="form-group">
+                    <label class="control-label" for="title">Title</label>
+                    <div class="controls">
+                        <input class="form-control" id="title" name="title" type="text" placeholder="Type in page title" value="{{ page.title }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="text">Enter text</label>
+                    <div class="controls">
+                        <textarea class="cleditor" id="text" name="text" style="width:100%; height:150px;" rows="3">{{ page.body }}</textarea>
+                    </div>
+                </div>
+
+
+                <div class="control-group" style="width:50%">
+                    <label class="checkbox inline">
+                        <input type="hidden" name="status" value="0">
+                        <div class="checker"><span><div class="checker"><span class="checked"><div class="checker"><span><input type="checkbox" name="status" value="1"></span></div></span></div></span></div> Publish?
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+<!-- end: Content -->
+
+
+</div>
+<!--/row-->
+</div>
+
+
+
+
+
+<div class="clearfix">
+</div>
+
+<footer>
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            &copy; 2014
+            <a href="https://musicequity.com">
+                Music Equity
+            </a>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-7 text-right">
+
+        </div>
+        <!--/.col-->
+
+    </div>
+    <!--/.row-->
+
+</footer>
+
+<!-- start: JavaScript-->
+<!--[if !IE]>
+-->
+
+<script src="assets/admin/js/jquery-2.1.0.min.js">
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script src="assets/admin/js/jquery-1.11.0.min.js">
+</script>
+
+<![endif]-->
+
+<!--[if !IE]>
+-->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+</script>
+
+<![endif]-->
+<script src="assets/admin/js/jquery-migrate-1.2.1.min.js">
+</script>
+<script src="assets/admin/js/bootstrap.min.js">
+</script>
+
+
+<!-- page scripts -->
+<script src="assets/admin/js/jquery-ui-1.10.3.custom.min.js">
+</script>
+
+<script src="assets/admin/js/jquery.dataTables.min.js"></script>
+<script src="assets/admin/js/dataTables.bootstrap.min.js"></script>
+<script src="assets/admin/js/jquery.cleditor.min.js"></script>
+<script src="assets/admin/js/jquery.autosize.min.js"></script>
+<script src="assets/admin/js/jquery.inputlimiter.1.3.1.min.js"></script>
+
+<!-- theme scripts -->
+<script src="assets/admin/js/custom.min.js">
+</script>
+<script src="assets/admin/js/core.min.js">
+</script>
+<script src="/assets/js/cropper.min.js"></script>
+
+<script>
+
+    $(document).ready(function(){
+
+        /* ---------- Text editor ---------- */
+        $('.cleditor').cleditor();
+
+
+    });
+</script>
+
+<!-- end: JavaScript-->
+
+</body>
+</html>

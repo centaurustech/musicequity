@@ -1,0 +1,41 @@
+.btn {
+  @include border-radius(0px, 0px);
+  font-weight: normal;
+}
+.btn:hover, .btn:focus {
+  color:#f9f9f9 !important;
+  outline: none !important;
+}
+.btn-blue {
+  font-family: BlissProRegular;
+  color:#f9f9f9;
+  border:0px;
+  background-color: $font-blue;
+  &:hover {
+    color:#f9f9f9;
+    background-color: $font-blue-hover;
+  }
+}
+
+
+.btn-purple {
+  font-family: BlissProRegular;
+  color: #f9f9f9;
+  border: 0px;
+  background-color: #90f;
+  &:hover {
+    color: #f9f9f9;
+    background-color: #AD33FF;
+  }
+}
+
+.btn-red {
+  font-family: BlissProRegular;
+  color: #f9f9f9;
+  border: 0px;
+  background-color: #ff000d;
+  &:hover {
+    color: #AD33FF;
+    background-color: #FF333D;
+  }
+}

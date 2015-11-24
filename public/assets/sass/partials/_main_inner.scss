@@ -1,0 +1,153 @@
+.main-inner {
+  margin-top:30px;
+}
+.user-menu {
+  width:210px;
+  background-color: #ffffff;
+}
+.image-container {
+  img {
+    width:100%;
+    height:auto;
+  }
+}
+.stat-elem {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 20px;
+  span {
+    top: 5px;
+    font-size:24px;
+  }
+}
+.stats {
+  background-color: rgba(109, 123, 162, 0.4) !important;
+  color: #fff;
+  font-size: 18px;
+}
+.links {
+  width:210px;
+}
+.block {
+  padding: 18px 20px 18px 20px;
+  width:210px;
+  background-color: #ffffff;
+  h3 {
+    margin-top:10px;
+    margin-bottom: 10px;
+    font-size:22px;
+  }
+}
+
+.wall {
+  background-color: #ffffff;
+  padding-left:18px;
+  padding-top:25px;
+  padding-right:18px;
+}
+.module {
+  width: 100%;
+  padding: 15px 20px 15px 20px;
+  background-color: rgba(77, 86, 114, 0.3);
+  overflow: hidden;
+  margin-bottom: 35px;
+}
+.moduletitle {
+  color: #fff;
+  font-family: BlissProRegular;
+  font-size: 15px;
+}
+.modulecontent {
+  padding-top: 20px;
+  color: #fff;
+}
+
+
+
+.item {
+  width:100%;
+  margin-bottom: 20px !important;
+  padding-bottom: 20px !important;
+  border-bottom: 1px solid #eaeef4;
+  .art {
+    float: left;
+    width: 25%;
+  }
+  .content {
+    float:left;
+    width:75%;
+    padding-left: 10px;
+    .title {
+      color: #00c0ff;
+      font-size: 19px;
+      letter-spacing: 1px;
+      font-family: BlissPro;
+    }
+  }
+}
+.mediainfo {
+  margin-bottom:10px;
+}
+.player {
+  width:100%;
+  margin-left: -24px;
+  .player-btn {
+    background-color: #00c0ff;
+    height: 55px;
+    width: 55px;
+    color: #fff;
+    font-size: 25px;
+    position: relative;
+    cursor: pointer;
+  }
+  .player-btn span {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+  }
+
+}
+
+.mediaelem {
+  padding-right: 10px;
+  color: #adbcd4;
+  font-size: 12px;
+}
+.socialblock {
+  color: #fff;
+  padding: 18px 20px 18px 5px;
+  font-size: 16px;
+  a {
+    color: #fff;
+    &:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+}
+.socialblock ul {
+  list-style: none;
+  padding: 0px;
+}
+.sociallinks img {
+  padding-right: 7px;
+  margin-top: -4px;
+}
+.social-share {
+  color: #00c0ff !important;
+  font-size: 14px !important;
+}
+.social-share a {
+  color: #00c0ff !important;
+  font-size: 14px !important;
+  margin-right: 5px;
+}
+
+.news-wall {
+
+}
+.wall-title {
+  font-size:18px;
+  font-family: BlissProBold;
+  padding-bottom:20px;
+}

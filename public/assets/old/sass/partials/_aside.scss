@@ -1,0 +1,67 @@
+.top-container {
+  width:100%;
+  .top-title {
+    background-color: rgba(255,255,255,0.25);
+    height: 50px;
+    color:#f9f9f9;
+    font-family: BlissProRegular;
+  }
+  .filter-icon {
+    font-size:20px;
+    color:#f9f9f9;
+    float:left;
+    margin:15px 15px 15px 15px;
+  }
+  .filter-links {
+    margin:15px 15px 15px 15px;
+    font-size:12px;
+    font-family: BlissProRegular;
+    float:right;
+    span {
+      margin-left:5px;
+    }
+    span.active {
+      text-decoration: underline;
+    }
+    span > span {
+      padding-right:5px;
+    }
+  }
+  .songs {
+    background-color: #f9f9f9;
+    width:100%;
+    .song {
+      width:100%;
+      padding-top:22px;
+      padding-bottom: 22px;
+      position: relative;
+      &:hover {
+        background-color: #e5f9ff;
+      }
+      .number {
+        width:15%;
+        float:left;
+        color:$font-form-color;
+        font-size:19px;
+        text-align: center;
+      }
+      .song-main {
+        float:left;
+        .title {
+          color: $font-blue;
+          font-size:15px;
+        }
+      }
+      .song-art {
+        float:right;
+        text-align: right;
+        img {
+          max-width: 50px;
+          max-height: 50px;
+          width:50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+}

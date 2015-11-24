@@ -1,0 +1,104 @@
+.main {
+  margin-top:60px;
+}
+.news-block {
+  width:47%;
+}
+.first-block {
+  margin-right: 6%;
+}
+.news-art {
+  width:100%;
+  img {
+    max-height: 135px;
+    max-width: 353px;
+    width:100%;
+    height:auto;
+  }
+}
+
+.hubs-carousel {
+  margin-top:60px;
+  .hubs-slider-container {
+    .hubs-slide {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width:100%;
+      .hub {
+        background-color: #ffffff;
+        padding:10px;
+        border:1px solid #6d7ba2;
+        width:23%;
+        //margin:0px 20px;
+      }
+    }
+
+
+  }
+}
+
+
+.featured-container {
+  margin-top:60px;
+  .featured-body {
+    background-color: #ffffff;
+  }
+  .featured-text-content {
+    height:200px;
+    overflow:hidden;
+  }
+  .featured-art {
+    width:47%;
+    img {
+      width:100%;
+      height:auto;
+    }
+  }
+  .featured-title {
+    font-size:17px !important;
+  }
+  .featured-content {
+    width:53%;
+    padding: 35px 20px;
+    font-family: BlissProRegular;
+    .block-content-title {
+      margin-top:20px;
+      margin-bottom:10px;
+    }
+  }
+}
+.featured-song {
+  .title {
+    color: #6d7ba2;
+    font-size: 15px;
+    letter-spacing: 1px;
+    font-family: BlissPro;
+  }
+  margin-top:20px;
+  margin-bottom:20px;
+  .player {
+    .player-btn {
+      background-color: #00c0ff;
+      height: 55px;
+      width: 55px;
+      color: #fff;
+      font-size: 25px;
+      position: relative;
+      cursor: pointer;
+      span {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+      }
+    }
+  }
+}
+.arrows a {
+  &:hover {
+    color:#f2dede;
+    text-decoration: none;
+  }
+  padding:3px;
+  color:#f9f9f9;
+}

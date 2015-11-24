@@ -1,0 +1,29 @@
+.ads {
+  margin-top:60px;
+  .ads-container {
+    width:100%;
+    margin-left:-10px;
+    margin-right:-10px;
+    .ads-block {
+      width:20%;
+      float:left;
+      padding-left:10px;
+      padding-right: 10px;
+      img {
+        width:100%;
+        height:auto;
+      }
+    }
+  }
+}
+footer {
+  margin-top:120px;
+  padding-bottom: 40px;
+  .footer-block {
+    color: #343434;
+    margin-right: 80px;
+    a {
+      color:#999999;
+    }
+  }
+}

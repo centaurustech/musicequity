@@ -1,0 +1,194 @@
+{% include 'partials/inner-header' %}
+<body>
+<div class="modal" id="image-crop">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                CROP IMAGE
+            </div>
+
+            <div class="modal-body">
+                <div class="image-container">
+
+                </div>
+                <button class="btn btn-blue" id="do-crop">Crop</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="/"><img class="img-responsive" src="assets/images/logo.png" alt="Music Equity"/></a>
+            </div>
+            <div class="nav-menu">
+                {% include 'partials/menu' %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </nav>
+</header>
+<section class="page">
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block-title">
+                    upload to music equity
+                </div>
+                <div class="block-content fullheight">
+                    <div class="panel fail" style="display: none">
+                        <div class="well">
+                           <h2>Something went wrong, try again later.</h2>
+                        </div>
+                    </div>
+                    <div class="panel">
+
+                        <div class="processing" id="processing">
+                            <h2>Processing file</h2>
+                            <div class="shaft-load2">
+                                <div class="shaft1"></div>
+                                <div class="shaft2"></div>
+                                <div class="shaft3"></div>
+                                <div class="shaft4"></div>
+                                <div class="shaft5"></div>
+                                <div class="shaft6"></div>
+                                <div class="shaft7"></div>
+                                <div class="shaft8"></div>
+                                <div class="shaft9"></div>
+                                <div class="shaft10"></div>
+                            </div>
+
+                        </div>
+                        <div class="preview" style="display: none">
+                            <h2>Preview snippet</h2>
+                            <div class="player-select">
+                                    <div class="player-btn pull-left play"  data-id="song-{{ id }}" data-duration="{{ duration }}" data-start="0" data-end="30" id="play-{{ id }}">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                    </div>
+                                    <div class="player-progress pull-left">
+                                        <canvas class="canvas" width="295" height="55" id="canvas-song-{{ id }}"></canvas>
+                                    </div>
+                                    <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <form action="addsong" enctype="multipart/form-data" method="post" id="NewSongForm" style="display: none">
+                        <input type="hidden" name="song" value="{{ id }}">
+                        <div class="panel">
+                            <h2>
+                                Basic Information
+                            </h2>
+                            <div class="song-info-block">
+                                <div class="song-art pull-left">
+                                    <div class="song-art-container">
+                                        {% if song.art | length > 0 %}
+                                            <img src="art/{{ song.id }}" alt=""/>
+                                        {% else %}
+                                        <span class="glyphicon glyphicon-picture" id="no-image"></span>
+                                        {% endif %}
+                                    </div>
+                                    <input type="file" id="art" name="art" style="display:none;" accept="image/jpg,image/png,image/jpeg,image/gif">
+                                    <div>Ideal picture size is 120*120 pixels</div>
+                                    <div>600*600 pixels is the largest the system will accept</div>
+                                    <div>To edit your image you can use <a href="https://pixlr.com/">pixlr.com</a></div>
+                                    <button class="btn-blue" type="button" id="choose"><span class="glyphicon glyphicon-search"></span> Choose</button>
+                                </div>
+                                <div class="song-details pull-right">
+                                    <div class="form-group">
+                                        <label for="title">Title:</label>
+                                        <input type="title" name="title" id="title" class="form-control regInput" value="{{ song.title }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="genre">Add genre(s):</label>
+                                        <input type="genre" name="genre" id="genre" class="form-control regInput" value="{{ song.genre }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Add description:</label>
+                                        <textarea class="regInput form-control" name="description" id="description" cols="30"
+                                                  rows="3" maxlength="255">{{ song.description }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Select price:</label>
+                                        <input type="price" data-allow-negative="false" data-affixes-stay="false" name="price" id="price" class="form-control regInput auto" value="{{  song.price | number_format(2) }}">
+                                        <span class="small">* 1.25 is the minimum price for the song</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="price">Donate song:</label>
+                                        <div class="input-group" style="width:100%;">
+
+                                            <span class="input-group-addon">%</span>
+                                            <input type="text" name="charity_share" class="form-control regInput" style="height:34px !important;" value="{{ song.charity_share }}">
+                                            <select name="charity" data-style="btn-blue form-control" data-size="auto">
+                                                <option value="0">Select charity</option>
+                                                {% for c in charity_list %}
+                                                    <option value="{{ c.charity.id }}" {% if c.charity.id == song.charity %} selected {% endif %}>{{ c.charity.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                        </div>
+                        <div class="panel form-end">
+                            <button class="btn-blue pull-right" type="submit">Save</button>
+                            <div class="clearfix">
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+</div>
+</section>
+{% include 'partials/footer' %}
+<script>
+    preview = false;
+    song = {{ id }};
+</script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="assets/javascripts/bootstrap.js"></script>
+<script src="assets/javascripts/backstretch.min.js"></script>
+<script src="assets/javascripts/bootstrap-select.min.js"></script>
+
+<script src="assets/javascripts/soundmanager2-nodebug-jsmin.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script src="/assets/javascripts/jquery.tagsinput.min.js"></script>
+<script src="/assets/javascripts/cropper.min.js"></script>
+<script src="/assets/javascripts/jquery.maskMoney.js"></script>
+<script src="/assets/javascripts/song.init.js"></script>
+<script>
+    soundManager.setup({
+        url: 'assets/swf/',
+        onready: function() {
+            var sound = soundManager.createSound({
+                id: 'song-{{ id }}',
+                url: 'song/{{ id }}',
+                autoPlay: false
+
+            });
+        }
+    });
+</script>
+<script src='/assets/javascripts/jcanvas.min.js'></script>
+
+
+</body>
+
+</html>

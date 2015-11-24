@@ -1,0 +1,45 @@
+<ul class="list-inline">
+    {% if user %}
+        {% if user.type == 'artist' %}
+            <li>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>  <a href="{{ url() }}/artist/{{ user.profile_url }}">Profile</a>
+            </li>
+            <li class="separator"></li>
+        {% endif %}
+        {% if user.type == 'customer' %}
+            <li>
+                <span class="glyphicon glyphicon-user"></span> <a href="{{ url() }}/c/{{ user.profile_url }}">Profile</a>
+            </li>
+            <li class="separator"></li>
+        {% endif %}
+        {% if user.type == 'charity' %}
+            <li>
+                <span class="glyphicon glyphicon-heart"></span> <a href="{{ url() }}/charity/{{ user.profile_url }}">Fundraiser</a>
+            </li>
+            <li class="separator"></li>
+        {% endif %}
+        <li>
+            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>  <a href="{{ url() }}/signout">Sign Out</a>
+
+        </li>
+    {% else %}
+    <li>
+        <span class="sign-up-label">signup</span>
+    </li>
+    <li>
+        <span class="me-icon-box me-icons-mic"></span><a href="#" class="open-modal" data-modal="artist-signup">Artist</a>
+    </li>
+    <li class="separator"></li>
+    <li>
+        <span class="me-icon-box me-icons-user"></span><a href="#" class="open-modal" data-modal="customer-signup">Customer</a>
+    </li>
+    <li class="separator"></li>
+    <li>
+        <span class="me-icon-box me-icons-heart"></span><a href="#" class="open-modal" data-modal="charity-signup">Fundraiser</a>
+    </li>
+    <li class="separator"></li>
+    <li>
+        <span class="me-icon-box me-icons-enter"></span><a href="#" class="open-modal" data-modal="signin">Sign In</a>
+    </li>
+    {% endif %}
+</ul>

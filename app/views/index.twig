@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Music Equity</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="assets/stylesheets/styles.css">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+    <![endif]-->
+    <!- Google Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-67536514-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+
+{% include 'partials/modals' %}
+
+<header>
+<nav>
+    <div class="container">
+        <div class="logo">
+            <a href="/"><img class="img-responsive" src="assets/images/logo.png" alt="Music Equity"/></a>
+        </div>
+        <div class="nav-menu">
+            {% include 'partials/menu' %}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+</nav>
+{% include 'partials/searchbar' %}
+</header>
+
+<section class="main">
+<div class="container">
+<div class="row">
+<article>
+<div class="col-lg-8 col-md-8 col-sm-8">
+
+    <!-- news: start -->
+    <div class="news-container">
+        <div class="block-title">
+            News
+        </div>
+        <div id="news-slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                {% for n in news %}
+                {% if loop.index is odd %}
+                <div class="item {% if loop.first %}active{% endif %}">
+                {% endif %}
+                    <div class="block news-block{% if loop.index is odd %} first-block pull-left{% else %} pull-right{% endif %}">
+                        <div class="block-art news-art">
+                            <img src="news/art/{{ n.id }}" alt=""/>
+                        </div>
+                        <div class="block-content">
+                            <div class="block-content-title">
+                                <a href="/news/{{ n.id }}">{{ n.title }}</a>
+                            </div>
+                            <div class="block-small">
+                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ n.created_at }}
+                            </div>
+                            <div class="block-text">
+                                {% set text =  n.body|striptags|length > 200 ? n.body|slice(0, 200) ~ '... <br /> <a class="pull-right" href="news/' ~ n.id ~ '">Read More</a>'   : n.body  %}
+                                {{ text | striptags('<a><br>') | raw  }}
+                            </div>
+                        </div>
+                    </div>
+                {% if (loop.index is even) or (loop.last) %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="arrows pull-right">
+            <a href="#news-slider" role="button" class="arrowlink" data-slide="prev">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+            </a>
+            <a href="#news-slider" role="button" class="arrowlink" data-slide="next">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </a>
+        </div>
+    </div>
+    <!-- news: end -->
+
+    <!-- featured artist: start -->
+    <div class="featured-container">
+        <div class="block-title">
+            FEATURED ARTIST
+        </div>
+        <div class="featured-body">
+            <div id="artist-slider" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    {% for f in featured %}
+                    <div class="item {% if loop.first %}active{% endif %}">
+                        <div class="featured-art pull-left">
+                            <img src="featured/art/{{ f.id }}" alt=""/>
+                        </div>
+                        <div class="featured-content block-text pull-right">
+                            <div class="block-small">
+                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> {{ f.created_at }}
+                            </div>
+                            <div class="block-content-title featured-title">
+                                <a href="/artist/{{ f.artist_info.profile_url }}">{{ f.title }}</a>
+                            </div>
+                            <div class="featured-song">
+                                <div class="title">
+                                    {{ f.songinfo.title }}
+                                </div>
+                                <div class="player">
+                                    <div class="player-btn play pull-left" data-id="{{ f.songinfo.id }}" data-picture="{% if f.songinfo.art is not empty %}art/{{ f.songinfo.id }}{% else %}profile/picture/{{ f.songinfo.author.picture }}/large{% endif %}" data-title="{{ f.songinfo.title }}">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                    </div>
+                                    <div class="song-progress pull-left" id="song-box-{{ f.songinfo.id }}">
+                                        <img src="thumbnail/{{ f.songinfo.id }}" class="img-responsive"/>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                </div>
+
+                            </div>
+                            <div class="featured-text-content">
+                                {{ f.text }}
+                            </div>
+                            <br />
+                            <a href="/artist/{{ f.artist_info.profile_url }}" class="btn btn-blue pull-right" style="margin-right:40px;">View Profile</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="arrows pull-right">
+            <a href="#artist-slider" role="button" class="arrowlink" data-slide="prev">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+            </a>
+            <a href="#artist-slider" role="button" class="arrowlink" data-slide="next">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </a>
+        </div>
+    </div>
+    <!-- featured artist: end -->
+
+    <!-- hubs carousel start -->
+    <div class="hubs-carousel">
+        <div class="block-title">Hubs</div>
+        <div class="hubs-slider-container">
+            <div id="hubs-slider-container" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    {% set open = true %}
+                    {% for hub in hubs %}
+                        {% if open %}
+                        <div class="item{% if loop.index == 1 %} active{% endif %}">
+                            <div class="hubs-slide">
+                        {% endif %}
+                                <div class="hub">
+                                    <div class="hub-art">
+                                        <a href="hubs/{{ hub.slug }}"><img src="/hub/picture/{{ hub.picture }}" class="img-responsive"></a>
+                                    </div>
+                                    <div class="hub-text">
+                                        <h4><a href="hubs/{{ hub.slug }}">{{ hub.name }}</a></h4>
+                                        {{ hub.description }}
+                                    </div>
+                                </div>
+                        {% set open = false %}
+                        {% if loop.index % 4 == 0 or loop.last %}
+                            {% set open = true %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="arrows pull-right">
+                <a href="#hubs-slider-container" role="button" class="arrowlink" data-slide="prev">
+                    <span class="glyphicon glyphicon-arrow-left"></span>
+                </a>
+                <a href="#hubs-slider-container" role="button" class="arrowlink" data-slide="next">
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- hubs carousel end -->
+
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4">
+    <div class="block-title">TOP 10 TRACKS</div>
+    <div class="top-container">
+        <div class="top-title">
+            <div class="filter-icon"><span class="glyphicon glyphicon-filter"></span></div>
+        </div>
+        <div class="songs">
+            {% for s in top_tracks %}
+            <div class="song">
+                <div class="number">
+                    {{ loop.index }}
+                </div>
+                <div class="song-main">
+                    <div class="title">
+                        <a href="track/{{ s.id }}">{{ s.title }}</a>
+                    </div>
+                    <span class="block-small">
+                        by <a href="/artist/{{ s.author.profile_url }}">{{ s.author.artist_name }}</a>
+                    </span>
+                    <div class="song-actions">
+                        <a class="btn btn-blue btn-xs" href="track/{{ s.id }}"><span class="glyphicon glyphicon-shopping-cart"></span> ${{ s.price | number_format(2) }}</a>
+                    </div>
+                </div>
+                <div class="song-art">
+                    <img src="art/{{ s.id }}" alt="">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="block-title" style="margin-top:25px;">
+        Charity List
+    </div>
+    <div class="top-container">
+        <div class="songs">
+            {% for c in charity_list %}
+                {% if c.deleted_at == 0 %}
+                    <div class="charity">
+                        <div class="charity-main">
+                            <a href="/charity/{{ c.profile_url }}">{{ c.charity.name }}-{{ c.deleted_at }}</a>
+                            <div class="desc">
+                                {{ c.charity.description }}
+                            </div>
+                        </div>
+                        <div class="charity-art">
+                            <img src="/profile/picture/{{ c.picture }}/medium" alt=""/>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+</article>
+</div>
+</div>
+</section>
+<div class="clearfix"></div>
+<section class="ads">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="block-title">
+                    SPONSORED ADS
+                </div>
+                <div class="ads-container">
+                    <div class="ads-block">
+                        <a href="{{ box[0].link }}"><img src="box/1/{{ date().timestamp }}" alt=""></a>
+                    </div>
+                    <div class="ads-block">
+                        <a href="{{ box[1].link }}"><img src="box/2/{{ date().timestamp }}" alt=""></a>
+                    </div>
+                    <div class="ads-block">
+                        <a href="{{ box[2].link }}"><img src="box/3/{{ date().timestamp }}" alt=""></a>
+                    </div>
+                    <div class="ads-block">
+                        <a href="{{ box[3].link }}"><img src="box/4/{{ date().timestamp }}" alt=""></a>
+                    </div>
+                    <div class="ads-block">
+                        <a href="{{ box[4].link }}"><img src="box/5/{{ date().timestamp }}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% include 'partials/footer' %}
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="assets/javascripts/bootstrap.js"></script>
+<script src="assets/javascripts/backstretch.min.js"></script>
+<script src="assets/javascripts/bootstrap-select.min.js"></script>
+<script src='/assets/javascripts/jcanvas.min.js'></script>
+<script src="assets/javascripts/soundmanager2-nodebug-jsmin.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js" type="text/javascript"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script src='/assets/javascripts/bootstrap-slider.js'></script>
+<script src="assets/javascripts/player.js"></script>
+<script>
+    user_location = '{{ location.country }}';
+    search_location = '{{ input_get('country') }}'
+    coordinates = [];
+    {% for u in users %} coordinates[coordinates.length] = { 'lat': {{ u.lat }}, 'lng': {{ u.lng }}, 'name': '{{ u.artist_name }}', 'url': '{{ base_url }}artist/{{ u.profile_url }}', 'color': 'red' }    ;{% endfor %};
+    {% for h in hubs %} coordinates[coordinates.length] = { 'lat': {{ h.lat }}, 'lng': {{ h.lng }}, 'name': '{{ h.name }}', 'url': '{{ base_url }}hubs/{{ h.slug }}', 'color': 'blue' }    ;{% endfor %};
+    $(document).ready(function () {
+
+        soundManager.setup({
+            url: 'assets/swf/'
+        });
+    });
+</script>
+<script src="assets/javascripts/main.js"></script>
+</body>
+</html>

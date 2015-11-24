@@ -1,0 +1,101 @@
+
+<div class="module">
+    <div class="moduletitle">
+        <span class="glyphicon glyphicon-calendar"></span> Upcoming Events
+        {% if user.id == profile.id %}
+            <a href="javascript:void(0)" class="new-event"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
+
+    </div>
+    <div class="modulecontent">
+
+        {% if events | length == 0 %}
+            This artist doesn't have any upcoming events
+        {% else %}
+            {% for e in events %}
+                <div class="moduleitem">
+                    <div class="moduleart pull-left">
+                        <img src="/profile/picture/{{ profile.picture }}/medium" style="height:50px; width:auto;"/>
+                    </div>
+                    <div class="moduleitemcontent pull-right">
+                        <div class="eventtitle">
+                            {{ e.name }}
+                        </div>
+                        <div class="eventlocation">
+                            {{ e.location }}
+                        </div>
+                        <div class="eventtime">
+                            <span class="glyphicon glyphicon-calendar"></span> {{ e.date }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+    </div>
+</div>
+<div class="module">
+    <div class="moduletitle">
+        <span class="glyphicon glyphicon-user"></span> Followers
+    </div>
+    <div class="modulecontent">
+        {% if countries | length == 0 %}
+            This artist doesn't have any followers yet
+        {% else %}
+            {% for name, amount in countries %}
+                <div class="moduleitem">
+                    <div class="moduleart pull-left" style="width:50%;">
+                        <strong>{{ name }}:</strong>
+                    </div>
+                    <div class="moduleitemcontent pull-right" style="width:40%;">
+                        <div class="eventtitle">
+                           {{ amount }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</div>
+<div class="module">
+    <div class="moduletitle">
+        <span class="glyphicon glyphicon-comment"></span> Latest Comments
+    </div>
+
+    <div class="modulecontent">
+
+        {% if comments | length == 0 %}
+            No one left the feedback yet
+        {% else %}
+            {% for c in comments %}
+                <div class="modulecomment">
+                    <div class="commenttext pull-left">
+                        <div class="modulecommentauthor">
+                                {% if c.getinfo.type == 'artist' %}
+                                    by <a href="/artist/{{ c.getinfo.profile_url }}">{{ c.getinfo.artist_name }}
+                                {% endif %}
+                                {% if c.getinfo.type == 'customer' %}
+                                    by <a href="/c/{{ c.getinfo.profile_url }}">{{ c.getinfo.name }}
+                                {% endif %}
+                                {% if c.getinfo.type == 'charity' %}
+                                    by <a href="/charity/{{ c.getinfo.profile_url }}">{{ c.getinfo.name }}
+                                {% endif %}
+                                    </a>
+                        </div>
+                        <div class="modulecommentbody">
+                            {{ c.comment }}
+                        </div>
+                    </div>
+                    <div class="commentdate pull-right text-right">
+                        <span class="glyphicon glyphicon-calendar"></span> {{ c.created_at }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+    </div>
+
+</div>

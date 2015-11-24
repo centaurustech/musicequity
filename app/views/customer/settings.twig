@@ -1,0 +1,113 @@
+{% include 'partials/inner-header' %}
+<body>
+<div class="modal" id="image-crop">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                CROP IMAGE
+            </div>
+
+            <div class="modal-body">
+                <div class="image-container">
+                </div>
+                <button class="btn btn-blue" id="do-crop">Crop</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="/"><img class="img-responsive" src="assets/images/logo.png" alt="Music Equity"/></a>
+            </div>
+            <div class="nav-menu">
+                {% include 'partials/menu' %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </nav>
+</header>
+<section class="page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block-title">
+                    PROFILE SETTINGS
+                </div>
+                <div class="block-content fullheight">
+                    <form action="/customer/settings" method="post" id="new_customer_form" enctype="multipart/form-data">
+                        {% if user.active != false %}
+                            <input type="hidden" name="active" value="true"/>
+                        {% endif %}
+                        <div class="left-form pull-left">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" class="form-control regInput" value="{{ profile.name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" name="country" id="country" class="form-control regInput" value="{{ profile.country }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" name="city" id="city" class="form-control regInput" value="{{ profile.city }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">Postcode</label>
+                                <input type="text" name="zip" id="zip" class="form-control regInput" value="{{ profile.zip }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" name="phone" id="phone" class="form-control regInput" value="{{ profile.phone }}">
+                            </div>
+
+                        </div>
+
+                        <div class="right-form pull-left">
+                            <div class="form-group">
+                                <label for="links">User pic</label>
+                                <div class="uploadbox">
+                                    <div class="profilepic pull-left">
+                                        {% if profile.picture == 0 %}
+                                            <img src="/assets//images/user.png" alt=""/>
+                                        {% else %}
+                                            <img src="/profile/picture/{{ profile.picture }}/large">
+                                        {% endif %}
+                                    </div>
+                                    <div class="btn-box pull-right text-right">
+                                        <input type="hidden" id="picture_id" name="picture_id" value="{{ profile.picture }}"/>
+                                        <input type="file" id="picture" name="picture" style="display:none;" accept="image/jpg,image/png,image/jpeg,image/gif" >
+                                        <button type="button" class="btn btn-default regBtn" id="upload-picture">Upload picture</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="saveform text-right">
+                            <button type="submit" role="submit" class="btn btn-default regBtn">Save settings</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'partials/footer' %}
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="assets/javascripts/bootstrap.js"></script>
+<script src="assets/javascripts/backstretch.min.js"></script>
+<script src="assets/javascripts/bootstrap-select.min.js"></script>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script src="/assets/javascripts/cropper.min.js"></script>
+<script src="/assets/javascripts/jquery.are-you-sure.js"></script>
+<script src="/assets/javascripts/settings.js"></script>
+</body>
+
+</html>

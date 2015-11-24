@@ -1,0 +1,17 @@
+.btn {
+  @include border-radius(0px, 0px);
+  font-weight: normal;
+}
+.btn:hover, .btn:focus {
+  color:#f9f9f9 !important;
+  outline: none !important;
+}
+.btn-blue {
+  font-family: BlissProRegular;
+  color:#f9f9f9;
+  background-color: $font-blue;
+  &:hover {
+    color:#f9f9f9;
+    background-color: $font-blue-hover;
+  }
+}

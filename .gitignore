@@ -1,0 +1,13 @@
+.DS_STORE
+.vagrant
+Vagrantfile
+.idea
+vendor
+app/storage/temp
+app/storage/news-art
+app/storage/cache
+app/storage/featured-art
+app/storage/pictures
+public/uploads/*
+!public/uploads/.gitkeep
+*.zip

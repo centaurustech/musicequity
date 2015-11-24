@@ -1,0 +1,168 @@
+<div class="modal fade" id="map-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                MAP VIEW
+            </div>
+
+            <div class="modal-body">
+                <div id="map-canvas" style="height:100%; width:100%;">
+
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="artist-signup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                ARTIST REGISTRATION
+            </div>
+
+            <div class="modal-body">
+                <div style="display: none; font-size:22px;" id="ArtistConfirmation">
+                    <div style="float:left; font-size:44px; margin-right:15px;"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></div>
+                    Thank you for registration, within next 5-10 minutes you will get an email with activation link.
+                </div>
+                <form action="signup" method="post" role="form" id="ArtistRegistrationForm">
+                    <input name="type" value="artist" type="hidden"/>
+                    <div class="form-group">
+                        <label for="email">What is your email</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Choose password</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">Re-type password</label>
+                        <input type="password" name="repassword" id="repassword" class="form-control">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="agree" id="agree" class="checkbox"> I agree with the <a href="/p/terms-and-conditions" target="_blank">Terms of Use</a> and <a href="/p/privacy-policy" target="_blank">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-blue pull-right">Sign Up</button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="customer-signup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                CUSTOMER REGISTRATION
+            </div>
+
+            <div class="modal-body">
+                <div style="display: none; font-size:22px;" id="CustomerConfirmation">
+                    <div style="float:left; font-size:44px; margin-right:15px;"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></div>
+                    Thank you for registration, within next 5-10 minutes you will get an email with activation link.
+                </div>
+                <form action="signup" method="post" role="form" id="CustomerRegistrationForm">
+                    <input name="type" value="customer" type="hidden"/>
+                    <div class="form-group">
+                        <label for="email">What is your email</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Choose password</label>
+                        <input type="password" name="password" id="customer_password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">Re-type password</label>
+                        <input type="password" name="repassword" id="customer_repassword" class="form-control">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="agree" id="agree" class="checkbox"> I agree with the <a href="/p/terms-and-conditions" target="_blank">Terms of Use</a> and <a href="/p/privacy-policy" target="_blank">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-blue pull-right">Sign Up</button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="charity-signup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                CHARITY REGISTRATION
+            </div>
+
+            <div class="modal-body">
+                <div style="display: none; font-size:22px;" id="CharityConfirmation">
+                    <div style="float:left; font-size:44px; margin-right:15px;"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></div>
+                    Thank you for registration, within next 5-10 minutes you will get an email with activation link.
+                </div>
+                <form action="signup" method="post" role="form" id="CharityRegistrationForm">
+                    <input name="type" value="charity" type="hidden"/>
+                    <div class="form-group">
+                        <label for="charity_email">What is your email</label>
+                        <input type="email" name="email" id="charity_email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="charity_password">Choose password</label>
+                        <input type="password" name="password" id="charity_password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">Re-type password</label>
+                        <input type="password" name="repassword" id="charity_repassword" class="form-control">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="agree" id="agree" class="checkbox"> I agree with the <a href="/p/terms-and-conditions" target="_blank">Terms of Use</a> and <a href="/p/privacy-policy" target="_blank">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-blue pull-right">Sign Up</button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="signin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                SIGN IN
+            </div>
+
+            <div class="modal-body">
+                <form action="signin" method="post" role="form" id="SignInForm">
+                    <div class="form-group">
+                        <label for="charity_email">Your Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="charity_password">Your Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <a href="/recover-password">Forgot Password?</a>
+                    </div>
+                    <div style="background-color: #DE3F62; color:#f9f9f9; padding:8px; margin-bottom:8px; display: none;" id="SignInError">
+
+                    </div>
+                    <button type="submit" class="btn btn-blue pull-right">Sign In</button>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% if profile.artist_name is empty %}user{{ profile.profile_url }}'s{% else %}{{ profile.artist_name }}'s {% endif %} profile on Music Equity</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="{{ base_url }}">
+    <link rel="stylesheet" href="assets/stylesheets/styles-inner.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+    <meta property="og:site_name" content="Music Equity">
+    <meta property="og:title" content="{{ profile.artist_name }} - {{ song.title }}">
+    <meta property="og:url" content="{{ base_url }}track/{{ song.id }}">
+    <meta property="og:description" content="{{ song.description }}">
+    <meta property="og:image" content="{{ base_url }}/profile/picture/{{ profile.picture }}/large">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script>windosong.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+    <![endif]-->
+    <!- Google Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-67536514-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+<body>
+{% include 'artist/partials/profile-modals' %}
+{% include 'artist/partials/cart' %}
+<header>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-lg-3 logo-container">
+                    <a href="/"><img class="img-responsive" src="assets/images/logo-small.png" alt="Music Equity"/></a>
+                </div>
+                <div class="col-md-5 col-sm-5 col-lg-5">
+                    <div class="search-input">
+                        <form action="search">
+                            <input name="q" type="text" placeholder="Search track / artist / album"/>
+                            <button role="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-lg-4 menu-container">
+                    {% include 'artist/partials/nav' %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</header>
+<div class="container main-inner">
+    <div class="row">
+        <div class="col-md-3 col-lg-3 col-sm-12 user-menu-container section">
+            {% include 'artist/partials/left-block' %}
+        </div>
+        <div class="col-md-6 col-lg-6 col-sm-12 section">
+            <div class="wall">
+                <div class="item">
+                    <div class="art">
+                        {% if song.art is not empty %}
+                            <img src="art/{{ song.id }}" class="img-responsive"/>
+                        {% else %}
+                            <img src="profile/picture/{{ song.author.picture }}/large" class="img-responsive" style="width:120px; height:120px;"/>
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <a href="track/{{ song.id }}">{{ song.title }}</a>  {% if song.author.id == user.id %}<a href="track/edit/{{ song.id }}"><span class="glyphicon glyphicon-pencil small"></span></a>{% endif %}
+                        </div>
+
+                        <div class="mediainfo">
+                            {% set like_found = 0 %}
+                            {% for l in song.likes %}
+                                {% if l.user == user.id %}
+                                    {% set like_found = 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            <span class="mediaelem firstelem"><span class="glyphicon glyphicon-calendar"></span> {{ song.date_human }} </span>
+                            <span class="mediaelem"><a href="#" class="{% if user %}like{% else %} sign-in {% endif %}" data-song={{ song.id }}"><span class="glyphicon {% if like_found %}glyphicon-heart{% else %}glyphicon-heart-empty{% endif %}"></span></a> <span class="like-wrapper">{{ song.likes | length }}</span></span>
+
+                            <span class="mediaelem"><span class="glyphicon glyphicon-volume-up"></span> <span id="hits-{{ song.id }}">{{ song.hits }}</span></span>
+                            <span class="mediaelem"><span class="glyphicon glyphicon-comment"></span> <a href="track/{{ song.id }}#comments">{{ song.comments | length }}</a></span>
+                            {% if song.author.id == user.id %}
+                                <span class="mediaelem"><span class="glyphicon glyphicon-remove"></span> <a data-toggle="modal" data-target="#confirm-delete" class="track-delete"  href="#" data-href="track/delete/{{ song.id }}">Delete</a></span>
+                            {% endif %}
+                            {% if user.type == 'customer' or user.type is not defined %}<span class="mediaelem"><span class="glyphicon glyphicon-shopping-cart"></span> <a class="buy" href="buy/{{ song.id }}" data-id="{{ song.id }}">Buy (${{ song.price | number_format(2) }})</a></span>{% endif %}
+                        </div>
+
+
+                        <div class="player">
+                            <div class="player-btn play pull-left" data-id="{{ song.id }}" data-picture="art/{{ song.id }}" data-title="{{ song.id }}">
+                                <span class="glyphicon glyphicon-play"></span>
+                            </div>
+                            <div class="song-progress pull-left" id="song-box-{{ song.id }}">
+                                <img src="/thumbnail/{{ song.id }}" class="img-responsive" />
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="mediainfo">
+                                        <span class="mediaelem social-share" >Share:
+                                            <span><a class="social-link" href="{{ Share.load(base_url ~ 'track/' ~  song.id , song.title).facebook }}"><i class="fa fa-facebook"></i></a></span>
+                                            <span><a class="social-link" href="{{ Share.load(base_url ~ 'track/' ~  song.id , song.title).gplus }}"><i class="fa fa-google-plus"></i></a></span>
+                                            <span><a class="social-link" href="{{ Share.load(base_url ~ 'track/' ~  song.id , song.title).twitter }}"> <i class="fa fa-twitter"></i></a></span>
+                                        </span>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="item">
+                    <div class="comment-section">
+                        <form action="comment" method="post" id="comment-form">
+                            <input type="hidden" name="song" value="{{ song.id }}"/>
+                            <input type="text" name="comment" class="form-control regInput pull-left" style="width:80% !important;" placeholder="Write a comment..."/>
+                            <button class="btn btn-blue pull-right" style="width:20%; height:34px;">Post</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                    <h3><span class="glyphicon glyphicon-comment"></span> Comments:</h3>
+                    <div id="lastdiv">
+                        {% for comment in comments_this %}
+                            <div class="comment-box">
+                                <div class="comment-art pull-left">
+                                    <img src="/profile/picture/{{ comment.getinfo.picture }}/medium" alt=""/>
+                                </div>
+                                <div class="comment-body pull-left">
+                                    <div class="comment-title">
+                                        {{ comment.getinfo.name_all }} <span class="small">on {{ comment.created_at }}</span>
+                                    </div>
+                                    <div class="comment-text">
+                                        {{ comment.comment }}
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-12 section">
+            {% include 'artist/partials/right-block' %}
+        </div>
+    </div>
+</div>
+
+{% include 'partials/footer' %}
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="assets/javascripts/bootstrap.js"></script>
+<script src="assets/javascripts/backstretch.min.js"></script>
+<script src="assets/javascripts/profile.js"></script>
+
+<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+<script src="assets/javascripts/bootstrap-select.min.js"></script>
+<script src='/assets/javascripts/jcanvas.min.js'></script>
+<script src='/assets/javascripts/bootstrap-slider.js'></script>
+<script src="assets/javascripts/soundmanager2-nodebug-jsmin.js"></script>
+<script src="assets/javascripts/cart.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js" type="text/javascript"></script>
+<script src="assets/javascripts/dropzone.js"></script>
+<script src="/assets/javascripts/jquery.maskMoney.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
+<script src="/assets/javascripts/track.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    {% if song.getLastPage %}
+    total_pages =  {{ songs.getLastPage }};
+    {% endif %}
+    {% if notifications | length > 0 %}
+    {% for n in notifiactions %}
+    toastr.warning('{{ n.text }}');
+    {% endfor %}
+    {% endif %}
+    $(document).ready(function () {
+        picture = '{{ user.picture }}';
+        name = '{{ user.name_all }}';
+        soundManager.setup({
+            url: 'assets/swf/'
+        });
+    });
+</script>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+{% include 'admin/partials/header' %}
+
+			
+			<!-- start: Content -->
+			<div id="content" class="col-sm-11">
+			
+			
+			<div class="row">
+				
+				<div class="stats-date col-md-3">
+					<div>Select time range:</div>
+
+					<form action="admin" method="post">
+					<div class="input-append">
+						<input type="text" name="daterange" value="{{ range }}" />
+
+						<script type="text/javascript">
+							$(function() {
+								$('input[name="daterange"]').daterangepicker();
+							});
+						</script>
+						<button type="submit" class="btn">Update</button>
+					</div>
+				</form>
+				</div><!--/col-->
+
+
+
+				<div class="stats col-md-9">
+					
+					<div class="stat">
+						<div class="left">
+							<div class="number green">{{ stats.songs_count }}</div>
+							<div class="title"><span class="color green"></span> Songs</div>
+						</div>
+
+					</div>
+					
+					<div class="stat">
+						<div class="left">
+							<div class="number yellow">{{ stats.artist_count }}</div>
+							<div class="title"><span class="color yellow"></span> Artists</div>
+						</div>
+
+					</div>
+					
+					<div class="stat">
+						<div class="left">
+							<div class="number blue">{{ stats.transactions_count }}</div>
+							<div class="title"><span class="color blue"></span>Transactions</div>
+						</div>
+
+					</div>
+						
+				</div><!--/col-->
+
+			</div><!--/row-->	
+
+			<div class="row">
+				
+				<div class="col-xs-12 overflow:hidden">
+
+					<div style="width:100%">
+						<div>
+							<canvas id="canvas" height="200" width="600"></canvas>
+						</div>
+					</div>
+				
+				</div><!--/col-->	
+			
+			</div><!--/row-->
+			
+			<hr>
+
+			
+
+				
+			
+       
+					
+			</div>
+			<!-- end: Content -->
+
+				</div><!--/row-->
+		
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<p>Here settings can be configured...</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		
+	</div><!--/container-->
+	
+		
+		
+	
+	<div class="clearfix"></div>
+	
+	<footer>
+		
+		<div class="row">
+			
+			<div class="col-sm-5">
+				&copy; 2014 <a href="https://musicequity.com">Music Equity</a>
+			</div><!--/.col-->
+			
+			<div class="col-sm-7 text-right">
+
+			</div><!--/.col-->	
+			
+		</div><!--/.row-->
+		
+	</footer>
+	
+	<!-- start: JavaScript-->
+	<!--[if !IE]>-->
+
+			<script src="assets/admin/js/jquery-2.1.0.min.js"></script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script src="assets/admin/js/jquery-1.11.0.min.js"></script>
+	
+	<![endif]-->
+
+	<!--[if !IE]>-->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/admin/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+		</script>
+
+	<!--<![endif]-->
+
+	<!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='assets/admin/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+	<script src="assets/admin/js/jquery-migrate-1.2.1.min.js"></script>
+	<script src="assets/admin/js/bootstrap.min.js"></script>
+	
+	
+	<!-- page scripts -->
+	<script src="assets/admin/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="assets/admin/js/excanvas.min.js"></script><![endif]-->
+    <script src="assets/admin/js/Chart.min.js"></script>
+    <script src="assets/admin/js/bootstrap-datepicker.min.js"></script>
+	<script src="assets/admin/js/moment.min.js"></script>
+	<script src="assets/admin/js/daterangepicker.min.js"></script>
+	
+	<!-- theme scripts -->
+	<script src="assets/admin/js/custom.min.js"></script>
+	<script src="assets/admin/js/core.min.js"></script>
+	
+	<script>
+		var lineChartData = {
+			labels : [{% for key,sg in graph.axis %} "{{ sg }}", {% endfor %}],
+			datasets : [
+				{
+					label: "Songs",
+					fillColor : "rgba(189,234,116,0.2)",
+					strokeColor : "rgba(189,234,116,1)",
+					pointColor : "rgba(189,234,116,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(189,234,116,1)",
+					data : [{% for key,sg in graph.songs %} "{{ sg }}", {% endfor %}]
+				},
+				{
+					label: "Artists",
+					fillColor : "rgba(234,232,116,0.2)",
+					strokeColor : "rgba(234,232,116,1)",
+					pointColor : "rgba(234,232,116,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(234,232,116,1)",
+					data : [{% for key,sg in graph.artists %} "{{ sg }}", {% endfor %}]
+				},
+				{
+					label: "Transactions",
+					fillColor : "rgba(103,194,239,0.2)",
+					strokeColor : "rgba(103,194,239,1)",
+					pointColor : "rgba(103,194,239,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(103,194,239,1)",
+					data : [{% for key,sg in graph.transactions %} "{{ sg }}", {% endfor %}]
+				}
+			]
+		}
+		window.onload = function(){
+			var ctx = document.getElementById("canvas").getContext("2d");
+			window.myLine = new Chart(ctx).Line(lineChartData, {
+				responsive: true
+			});
+		}
+	</script>
+	
+	<!-- end: JavaScript-->
+	
+</body>
+</html>

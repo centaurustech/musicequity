@@ -1,0 +1,44 @@
+<ul class="inner-menu list-inline">
+    {% if user.type == 'customer' or user.type is not defined %}
+        <li>
+            <div class="menu-pill">
+                <a id="cd-cart-trigger" href=""> <span class="glyphicon glyphicon-shopping-cart"></span> Cart <span id="cart-counter"></span></a>
+            </div>
+        </li>
+    {% endif %}
+    {% if user %}
+        {% if user.type == 'artist' %}
+            <li>
+                <span class="glyphicon glyphicon-upload"></span>
+                <a id="upload-btn" href="javascript:void(0)">
+                    Upload
+                </a>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-list"></span>
+                <a id="album-btn" style="cursor: pointer;">
+                   Create Album
+                </a>
+            </li>
+        {% endif %}
+
+        <li>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                <span class="glyphicon glyphicon-user"></span> {{ user.name }} {% if user.type == 'charity' %} {{ user.charity.name }} {% endif %}
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                {% if user.type == 'artist' %}
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile/settings">Settings</a></li>
+                {% endif %}
+                {% if user.type == 'customer' %}
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/customer/settings">Settings</a></li>
+                {% endif %}
+                {% if user.type == 'charity' %}
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/charity/settings">Settings</a></li>
+                {% endif %}
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/signout">Logout</a></li>
+            </ul>
+        </li>
+    {% endif %}
+
+</ul>

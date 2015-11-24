@@ -1,0 +1,44 @@
+@media only screen
+and (max-device-width : 768px) {
+  .logo-container {
+    img {
+      margin:0 auto;
+    }
+  }
+  .menu-container {
+    text-align: center;
+  }
+  .inner-menu {
+    float:none !important;
+    margin:0 auto;
+    padding:12px;
+  }
+  .user-menu {
+    width:100%;
+    background-color: #ffffff;
+  }
+  .block {
+    width:100%;
+  }
+  .section {
+    margin-top:30px;
+  }
+  .mediaelem {
+    padding-right: 5px;
+  }
+  .player-btn {
+
+    height: 35px !important;
+    width: 35px !important;
+    font-size:14px !important;
+  }
+  .song-progress {
+    width:80%;
+  }
+  .mediainfo {
+    margin-bottom:0px !important;
+  }
+  .links {
+  width:100%;
+}
+}

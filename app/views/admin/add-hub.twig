@@ -1,0 +1,241 @@
+{% include 'admin/partials/header' %}
+<style>
+    label.help-inline {
+        color:red;
+    }
+</style>
+<!-- start: Content -->
+<div id="content" class="col-sm-11">
+    <div class="box">
+        <div class="box-header">Add Hubs</div>
+        <div class="box-content">
+            <form class="form-horizontal" action="admin/hubs/post" method="post" enctype="multipart/form-data" id="HubsForm">
+                {% if hub %}
+                    <input type="hidden" name="id" value="{{ hub.id }}"/>
+                {% endif %}
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input class="form-control" id="name" name="name" type="text" placeholder="Type in hub name" value="{{ hub.name }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="description">Enter text</label>
+                    <div class="controls">
+                        <textarea class="cleditor" id="description" name="description" rows="6" style="width: 100%; overflow: hidden; word-wrap: break-word; resize: horizontal; height: 126px;">{{ hub.description }}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="location">Location</label>
+                    <div class="controls">
+                        <input class="form-control" id="location" name="location" type="text" placeholder="City, State, Postcode" value="{{ hub.location }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="facebook">Facebook</label>
+                    <div class="controls">
+                        <input class="form-control" id="facebook" name="facebook" type="text" value="{{ hub.facebook }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="google">Google Plus</label>
+                    <div class="controls">
+                        <input class="form-control" id="google" name="google" type="text"  value="{{ hub.google }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="twitter">Twitter</label>
+                    <div class="controls">
+                        <input class="form-control" id="twitter" name="twitter" type="text" value="{{ hub.twitter }}">
+                    </div>
+                </div>
+
+                {% if hub.picture > 0 %}
+                    <img src="/hub/picture/{{ hub.picture }}" alt=""/>
+                {% endif %}
+                <div class="control-group" id="image-block">
+                    <label class="control-label" for="AttachFile">Select picture
+                    </label>
+                    <div class="controls">
+                        <div class="uploader"><div class="uploader" id="uniform-AttachFile"><input class="input-file uniform_on" name="AttachFile" id="AttachFile" accept="image/jpg,image/png,image/jpeg,image/gif" type="file"></div></div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+<!-- end: Content -->
+
+
+</div>
+<!--/row-->
+</div>
+
+
+
+
+
+<div class="clearfix">
+</div>
+
+<footer>
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            &copy; 2014
+            <a href="https://musicequity.com">
+                Music Equity
+            </a>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-7 text-right">
+
+        </div>
+        <!--/.col-->
+
+    </div>
+    <!--/.row-->
+
+</footer>
+
+<!-- start: JavaScript-->
+<!--[if !IE]>
+-->
+
+<script src="assets/admin/js/jquery-2.1.0.min.js">
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script src="assets/admin/js/jquery-1.11.0.min.js">
+</script>
+
+<![endif]-->
+
+<!--[if !IE]>
+-->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+</script>
+
+<![endif]-->
+<script src="assets/admin/js/jquery-migrate-1.2.1.min.js">
+</script>
+<script src="assets/admin/js/bootstrap.min.js">
+</script>
+
+
+<!-- page scripts -->
+<script src="assets/admin/js/jquery-ui-1.10.3.custom.min.js">
+</script>
+
+<script src="assets/admin/js/jquery.dataTables.min.js"></script>
+<script src="assets/admin/js/dataTables.bootstrap.min.js"></script>
+<script src="assets/admin/js/jquery.autosize.min.js"></script>
+<script src="assets/admin/js/jquery.inputlimiter.1.3.1.min.js"></script>
+<script src="assets/admin/js/jquery.cleditor.min.js"></script>
+
+<script src="assets/javascripts/cropper.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+
+
+        function ReadData(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    var image = $('<img id="crop"/>').attr('src', e.target.result);
+
+                    if(image[0].naturalHeight < 140 || image[0].naturalWidth < 360) {
+                        alert('Image is too small, should be at least 210x210 px');
+                        $("#AttachFile").replaceWith($("#AttachFile").clone());
+                    }
+                    else {
+                        $('#crop-modal').modal('show');
+                        $('.image-container').empty();
+                        $('.image-container').append(image);
+                        $("#crop").cropper({
+                            aspectRatio: 210 / 210,
+                            autoCropArea: 0.8, // Center 80%
+                            multiple: false,
+                            dragCrop: false,
+                            dashed: false,
+                            movable: true,
+                            resizable: false,
+
+                            built: function () {
+                                $(this).cropper("zoom", 0.5);
+                            }
+                        });
+                    }
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#myModal').on('hide.bs.modal', function (e) {
+            $('#crop-modal').cropper("destroy");
+            $("#AttachFile").replaceWith($("#AttachFile").clone(true));
+        });
+
+        /* ---------- Datable ---------- */
+        $('textarea').autosize();
+        $("#AttachFile").change(function(){
+            ReadData(this);
+        });
+        $('#do-crop').click(function () {
+            var data = $('#crop').cropper("getDataURL", {width:210, height: 210});
+            var input = $('<input type="hidden" name="art"/>').attr('value', data);
+            $('#crop-modal').modal('hide');
+            var image =  $('<img id="preview"/>').attr('src', data);
+            $('#image-block').empty();
+            $('#image-block').append(image);
+            $('#image-block').append(input);
+        });
+
+        $('.cleditor').cleditor();
+
+    });
+</script>
+
+<!-- end: JavaScript-->
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+
+<div class="user-menu">
+    <div class="image-container">
+        {% if profile.promo == '' %}
+        <div class="profile-picture">
+            <a href="{{ profile.type }}/{{ profile.profile_url }}">
+                <img src="/profile/picture/{{ profile.picture }}/large" class="img-responsive">
+            </a>
+        </div>
+        {% endif %}
+        {% if profile.promo %}
+            {% if profile.promo != '' %}
+                <div class="promo">
+                    <iframe width="210" height="210" src="//www.youtube.com/embed/{{ profile.promo_link }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="profile-picture" style="display: none;">
+                    <a href="{{ profile.type }}/{{ profile.profile_url }}">
+                        <img src="/profile/picture/{{ profile.picture }}/large" class="img-responsive">
+                    </a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+<div class="block">
+    {% if profile.picture != 0 %}
+        {% if profile.promo != '' %}
+            <div class="sel-holder">
+                <a href="#" class="selector" data-target="picture"><img src="/profile/picture/{{ profile.picture }}/large"></a>
+                <a href="#" class="selector" data-target="video"><span class="glyphicon glyphicon-facetime-video"></span></a>
+            </div>
+        {% endif %}
+    {% endif %}
+    <h3><a href="{{ profile.type }}/{{ profile.profile_url }}">{% if profile.artist_name is empty %}user{{ profile.profile_url }}{% else %}{{ profile.artist_name }} {% endif %}</a></h3>
+    <span class="glyphicon glyphicon-map-marker"></span>
+    {% if profile.city is empty and profile.country is empty %}
+        No address available
+    {% else %}
+        {% if profile.city is empty %}
+            {{ profile.country }}
+        {% else %}
+            {{ profile.city }}, {{ profile.country }}
+        {% endif %}
+    {% endif %}
+</div>
+<div class="block stats">
+    <div class="stat-elem pull-left"> <span class="glyphicon glyphicon-user"></span> {{ profile.followers | length }}</div>
+    <div class="stat-elem pull-right"> <span class="glyphicon glyphicon-play-circle"></span> {{ songs | length }}</div>
+    <div class="clearfix"></div>
+</div>
+<div class="block">
+    {% if profile.bio is empty %}
+        Bio section is not complete
+    {% else %}
+        <div class="bio-collapse">
+            {% if profile.bio | length > 180 %}
+                <div class="less-text">
+                    {{ profile.bio | raw | slice(0,180) }}
+                    <p style="text-align: right"><a href="#" id="more-do">More...</a></p>
+                </div>
+                <div class="more-text" style="display: none;">
+                    {{ profile.bio | raw  }}
+                    <p style="text-align: right"><a href="#" id="less-do">Less...</a></p>
+                </div>
+            {% else %}
+                <div class="more">
+                    {{ profile.bio | raw  }}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+<div class="links">
+    <div>
+        {% if user %}
+            <button class="btn btn-purple" id="faq-btn" style="width:100% !important"><span class="glyphicon glyphicon-question-sign"></span> FAQ</button>
+            {% if user.id == profile.id %}
+                <a href="/profile/settings/"><button class="btn  btn-blue" style="width:100% !important"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</button></a>
+                <button class="btn btn-red" id="transactions-btn" style="width:100% !important"><span class="glyphicon glyphicon-transfer"></span> Completed Transactions</button>
+            {% else %}
+                {% set following = 0 %}
+                {% for f in user.follows %}
+                    {% if f.artist == profile.id %}
+                        {% set following = 1 %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if following == 1 %}
+                    <a href="{{ url() }}/artist/{{ profile.profile_url }}/follow"><button class="btn btn-blue" style="width:100% !important"><span class="glyphicon glyphicon-minus"></span> Unfollow</button></a>
+                {% else %}
+                    <a href="{{ url() }}/artist/{{ profile.profile_url }}/follow"><button class="btn btn-blue" style="width:100% !important"><span class="glyphicon glyphicon-plus"></span> Follow</button></a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+<div class="socialblock">
+    <ul class="sociallinks">
+        {% for w in profile.weblinks %}
+            <li>
+                {% if w.title matches '/facebook.com/' %}
+                    <img src="assets/images/fbicon.png" alt=""/><a href="{{ w.url }}">Facebook</a>
+                {% elseif w.title matches '/twitter.com/' %}
+                    <img src="assets/images/twticon.png" alt=""/><a href="{{ w.url }}">Twitter</a>
+                {% else %}
+                    <img src="assets/images/globe.png" alt=""/><a href="{{ w.url }}">{{ w.title }}</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        <li>
+            <img src="assets/images/report.png" alt=""/><a href="#" id="report-btn">Report</a>
+        </li>
+    </ul>
+
+
+</div>

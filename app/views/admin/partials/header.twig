@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+<!-- start: Meta -->
+    <meta charset="utf-8">
+    <title>
+      Music Equity - Control Panel
+    </title>
+<!-- end: Meta -->
+    <base href="{{ base_url }}">
+<!-- start: Mobile Specific -->
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+<!-- end: Mobile Specific -->
+
+<!-- start: CSS -->
+    <link href="assets/admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/admin/css/style.min.css" rel="stylesheet">
+    <link href="assets/admin/css/retina.min.css" rel="stylesheet">
+    <link href="assets/stylesheets/cropper.min.css" rel="stylesheet">
+<!-- end: CSS -->
+    <script src="assets/admin/js/jquery-2.1.0.min.js"></script>
+<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]> <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"> </script> <script src="assets/admin/js/respond.min.js"> </script> <link href="assets/admin/css/ie.css" rel="stylesheet"> <![endif]-->
+
+    <!--[if IE 9]> <link id="ie9style" href="assets/admin/css/ie9.css" rel="stylesheet"> <![endif]-->
+
+    <!- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-67536514-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+
+  <body>
+    <div class="modal" id="crop-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button">&times;</button>
+            <h4 class="modal-title">Crop Image</h4>
+          </div>
+          <div class="modal-body">
+            <div class="image-container" style="height:400px;"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" id="do-crop" type="button">Crop</button>
+          </div>
+        </div>
+<!-- /.modal-content -->
+      </div>
+<!-- /.modal-dialog -->
+    </div>
+<!-- /.modal -->
+<!-- start: Header -->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <button class="navbar-toggle" data-target=".sidebar-nav.nav-collapse" data-toggle="collapse" type="button">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/admin">
+            <span>
+              Music Equity - Control Panel
+            </span>
+          </a>
+
+<!-- start: Header Menu -->
+          <div class="nav-no-collapse header-nav">
+            <ul class="nav pull-right">
+<!-- start: User Dropdown -->
+              <li class="dropdown">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="index.html#">
+                  <i class="halflings user white"></i>
+                  {{ user.name }}
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="/signout">
+                      <i class="halflings off white"></i>
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+<!-- end: User Dropdown -->
+            </ul>
+          </div>
+<!-- end: Header Menu -->
+
+        </div>
+      </div>
+    </div>
+<!-- start: Header -->
+
+    <div class="container">
+      <div class="row">
+
+<!-- start: Main Menu -->
+        <div class="col-sm-1" id="sidebar-left">
+          <div class="nav-collapse sidebar-nav collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav nav-tabs nav-stacked main-menu">
+              {% if user.admin_access == 'full' %}
+              <li>
+                <a href="admin">
+                  <i class="fa fa-bar-chart-o"></i>
+                  <span class="hidden-sm">
+                    Dashboard
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+              {% if user.admin_access == 'full' %}
+              <li>
+                <a href="admin/transactions">
+                  <i class="fa fa-usd"></i>
+                  <span class="hidden-sm">
+                    Transactions
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+              {% if user.admin_access == 'full' %}
+              <li>
+                <a href="admin/users">
+                  <i class="fa fa-users"></i>
+                  <span class="hidden-sm">
+                    Users
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+              {% if user.admin_access == 'full' %}
+              <li>
+                <a href="admin/admins">
+                  <i class="fa fa-key"></i>
+                  <span class="hidden-sm">
+                    Admins
+                  </span>
+                </a>
+              </li>
+              {% endif %}
+              <li>
+                <a href="admin/hubs">
+                  <i class="fa fa-globe "></i>
+                  <span class="hidden-sm">
+                    Hubs
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="admin/news">
+                  <i class="fa fa-pencil"></i>
+                  <span class="hidden-sm">
+                    News
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="admin/menu">
+                  <i class="fa fa-bars"></i>
+                  <span class="hidden-sm">
+                    Menu
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="admin/pages">
+                  <i class="fa fa-file"></i>
+                  <span class="hidden-sm">
+                    Pages</span>
+                </a>
+              </li>
+              <li>
+                <a href="admin/ads">
+                  <i class="fa fa-bullhorn"></i>
+                  <span class="hidden-sm">
+                    Ads
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a class="hidden-xs open" id="main-menu-toggle">
+          <i class="fa fa-bars"></i>
+        </a>
+<!-- end: Main Menu -->

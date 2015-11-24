@@ -1,0 +1,22 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                {% if links|length > 0 %}
+                {% for row in links|batch(4) %}
+                    <div class="footer-block pull-left">
+                        {% for column in row %}
+                            <a href="{{ column.url }}">{{ column.title }}</a><br />
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                {% endif %}
+                <div class="footer-block pull-right">
+                    © Music Equity, 2014
+                    <br>
+                    Developed by Netcomp Solutions.
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

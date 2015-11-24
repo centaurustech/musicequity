@@ -1,0 +1,77 @@
+
+<div class="user-menu">
+    <div class="image-container">
+        <div class="profile-picture">
+            <a href="hubs/{{ hub.slug }}">
+                <img src="/hub/picture/{{ hub.picture }}" class="img-responsive">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="block">
+    <h3> <a href="hubs/{{ hub.slug }}">{{ hub.name }}</a></h3>
+</div>
+<div class="block stats">
+    <div class="stat-elem pull-left"> <span class="glyphicon glyphicon-user"></span> {{ artists | length }} </div>
+    <div class="stat-elem pull-right"> <span class="glyphicon glyphicon-play-circle"></span> {{ songs | length }} </div>
+    <div class="clearfix"></div>
+</div>
+<div class="block">
+    {% if hub.description is empty %}
+        There is no description available
+    {% else %}
+        <div class="bio-collapse">
+            {% if hub.description | length > 180 %}
+                <div class="less-text">
+                    {{ hub.description | raw | slice(0,180) }}
+                    <p style="text-align: right"><a href="#" id="more-do">More...</a></p>
+                </div>
+                <div class="more-text" style="display: none;">
+                    {{ hub.description | raw  }}
+                    <p style="text-align: right"><a href="#" id="less-do">Less...</a></p>
+                </div>
+            {% else %}
+                <div class="more">
+                    {{ hub.description | raw  }}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+<div class="links">
+    <div>
+        {% set following = 0 %}
+        {% for f in user.follows %}
+            {% if f.hub == hub.id %}
+                {% set following = 1 %}
+            {% endif %}
+        {% endfor %}
+        {% if following == 1 %}
+            <a href="{{ url() }}/hubs/{{ hub.slug }}/follow"><button class="btn btn-blue" style="width:100% !important"><span class="glyphicon glyphicon-minus"></span> Unfollow</button></a>
+        {% else %}
+            <a href="{{ url() }}/hubs/{{ hub.slug }}/follow"><button class="btn btn-blue" style="width:100% !important"><span class="glyphicon glyphicon-plus"></span> Follow</button></a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="socialblock">
+    <ul class="sociallinks">
+        {% if hub.facebook | length > 0 %}
+        <li>
+            <img src="assets/images/fbicon.png" alt=""/><a href="{{ hub.facebook }}" id="report-btn">Facebook</a>
+        </li>
+        {% endif %}
+        {% if hub.google | length > 0 %}
+        <li>
+            <i style="padding-right: 3px;  margin-left: 4px; font-size: 18px;" class="fa fa-google-plus"></i><a href="{{ hub.google }}" id="report-btn">Google+</a>
+        </li>
+        {% endif %}
+        {% if hub.twitter | length > 0 %}
+        <li>
+            <img src="assets/images/twticon.png" alt=""/><a href="{{ hub.twitter }}" id="report-btn">Facebook</a>
+        </li>
+        {% endif %}
+    </ul>
+
+
+</div>

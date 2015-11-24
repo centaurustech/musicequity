@@ -1,0 +1,191 @@
+{% include 'admin/partials/header' %}
+
+<!-- start: Content -->
+<div id="content" class="col-sm-11">
+
+
+    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Customer Location</th>
+            <th>Artist</th>
+            <th>Artists Paypal</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Song/Album</th>
+            <th>Amount</th>
+            <th>Artist Share</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in list %}
+            <tr>
+                <td>{{ item.code }}</td>
+                <td>
+                    {% if item.customer == '0' %}
+                        Guest
+                    {% else %}
+                        {{ item.customer_info.name }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if item.customer == '0' %}
+                        Unknown
+                    {% else %}
+                        {{ item.customer_info.country }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ item.artist_info.artist_name }}
+                </td>
+                <td>
+                    {{ item.artist_info.paypal }}
+                </td>
+                <td>
+                    {{ item.artist_info.phone }}
+                </td>
+                <td>
+                    {{ item.artist_info.email }}
+                </td>
+                <td>
+                    {% if item.bundle %}Album: {{ item.bundleinfo.name }}{% else %}Track: {{ item.songinfo.title }} {% endif %}
+                </td>
+                <td>
+                    ${% if item.bundle %}{{ item.bundleinfo.price | number_format(2) }}{% else %}{{ item.songinfo.price | number_format(2) }}{% endif %}
+                </td>
+                <td>
+                    ${{ item.topay | number_format(2) }}
+                </td>
+                <td>
+                    {% if item.paid == 0 %}
+                        <a href="/admin/transaction/status/{{ item.id }}"><span class="label label-important">Not paid</span></a>
+                    {% else %}
+                        <a href="/admin/transaction/status/{{ item.id }}"><span class="label label-success">Paid</span></a>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ item.created_at }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+</div>
+<!-- end: Content -->
+
+
+</div>
+<!--/row-->
+</div>
+
+
+
+
+
+<div class="clearfix">
+</div>
+
+<footer>
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            &copy; 2014
+            <a href="https://musicequity.com">
+                Music Equity
+            </a>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-7 text-right">
+
+        </div>
+        <!--/.col-->
+
+    </div>
+    <!--/.row-->
+
+</footer>
+
+<!-- start: JavaScript-->
+<!--[if !IE]>
+-->
+
+<script src="assets/admin/js/jquery-2.1.0.min.js">
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script src="assets/admin/js/jquery-1.11.0.min.js">
+</script>
+
+<![endif]-->
+
+<!--[if !IE]>
+-->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+</script>
+
+<![endif]-->
+<script src="assets/admin/js/jquery-migrate-1.2.1.min.js">
+</script>
+<script src="assets/admin/js/bootstrap.min.js">
+</script>
+
+
+<!-- page scripts -->
+<script src="assets/admin/js/jquery-ui-1.10.3.custom.min.js">
+</script>
+
+<script src="assets/admin/js/jquery.dataTables.min.js"></script>
+<script src="assets/admin/js/dataTables.bootstrap.min.js"></script>
+
+<!-- theme scripts -->
+<script src="assets/admin/js/custom.min.js">
+</script>
+<script src="assets/admin/js/core.min.js">
+</script>
+
+<script>
+    $(document).ready(function(){
+        /* ---------- Datable ---------- */
+        $('.datatable').dataTable({
+            "sDom": "<'row'<'col-lg-6'l><'col-lg-6'f>r>t<'row'<'col-lg-12'i><'col-lg-12 center'p>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sLengthMenu": "_MENU_ records per page"
+            }
+        });
+    });
+</script>
+
+<!-- end: JavaScript-->
+
+</body>
+</html>

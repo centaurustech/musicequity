@@ -1,0 +1,60 @@
+html {
+  @include font-smoothing(on);
+}
+body {
+  background-color: #000000;
+  font-family: BlissProRegular, Verdana;
+}
+.block-title {
+  width:100%;
+  text-transform: uppercase;
+  color:#f9f9f9;
+  font-family: BlissProBold;
+  margin-bottom:20px;
+}
+.block-content-title {
+  font-family: BlissProRegular;
+  font-size:16px;
+  color: $font-blue;
+}
+.block-small {
+  font-size:13px;
+  color: $form-border-color;
+}
+.block-white-box {
+  background: #fff;
+  margin-top: 15px;
+  padding: 60px 35px 60px 35px;
+  color: #6d7ba2;
+}
+.block-text {
+  font-size:14px;
+  color: $font-form-color;
+}
+.block-content {
+  width:100%;
+  background-color: #f9f9f9;
+  padding:20px;
+  float: left;
+  padding-bottom: 1000px;
+  margin-bottom: -980px;
+
+
+}
+#scroll-block {
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+}
+.more {
+  width:100%;
+  margin:10px 10px 10px 10px;
+  button {
+    width:100%;
+  }
+}
+::selection {
+  background: #a0bcda;
+}
+::-moz-selection {
+  background: #a0bcda;
+}

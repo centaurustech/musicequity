@@ -1,0 +1,63 @@
+
+<div class="module">
+    <div class="moduletitle">
+        <span class="glyphicon glyphicon-calendar"></span> Upcoming Events
+    </div>
+    <div class="modulecontent">
+
+        {% if events | length == 0 %}
+            No upcoming events :(
+        {% else %}
+            {% for e in events %}
+                <div class="moduleitem">
+                    <div class="moduleart pull-left">
+                        <img src="/profile/picture/{{ e.getartist.picture }}/medium" style="height:50px; width:auto;"/>
+                    </div>
+                    <div class="moduleitemcontent pull-right">
+                        <div class="eventtitle">
+                            {{ e.getartist.artist_name }} / {{ e.name }}
+                        </div>
+                        <div class="eventlocation">
+                            {{ e.location }}
+                        </div>
+                        <div class="eventtime">
+                            <span class="glyphicon glyphicon-calendar"></span> {{ e.date }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+    </div>
+</div>
+<div class="module">
+    <div class="moduletitle">
+        <span class="glyphicon glyphicon-user"></span> Artists
+    </div>
+    <div class="modulecontent">
+        {% if artists | length == 0 %}
+            This hub does not have any artists
+        {% else %}
+            {% for pf in artists|slice(0, 3)  %}
+                <div class="moduleitem">
+                    <div class="moduleart pull-left">
+                        <img src="/profile/picture/{{ pf.picture }}/small" style="height:50px; width:auto;"/>
+                    </div>
+                    <div class="moduleitemcontent pull-right">
+                        <div class="eventtitle">
+                            {{ pf.artist_name }}
+                        </div>
+                        <div class="eventlocation">
+                            {{ pf.bio }}
+                        </div>
+                        <div class="eventtime">
+                            <span class="glyphicon glyphicon-user"></span> <a href="/artist/{{ pf.profile_url }}">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</div>

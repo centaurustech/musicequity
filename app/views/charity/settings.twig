@@ -1,0 +1,150 @@
+{% include 'partials/inner-header' %}
+<body>
+<div class="modal" id="image-crop">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                CROP IMAGE
+            </div>
+
+            <div class="modal-body">
+                <div class="image-container">
+                </div>
+                <button class="btn btn-blue" id="do-crop">Crop</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<header>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="/"><img class="img-responsive" src="assets/images/logo.png" alt="Music Equity"/></a>
+            </div>
+            <div class="nav-menu">
+                {% include 'partials/menu' %}
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </nav>
+</header>
+<section class="page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block-title">
+                    SET UP FUNDRAISER
+                </div>
+                <div class="block-content fullheight">
+                    {% if errors | length > 0 %}
+                        <div class="well">
+                            <ul>
+                                {% for e in errors %}
+                                    <li>{{ e }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    <form action="/charity/settings" method="post" enctype="multipart/form-data">
+                        {% if user.active != false %}
+                            <input type="hidden" name="active" value="true"/>
+                        {% endif %}
+                        <div class="left-form pull-left">
+                            <div class="form-group">
+                                <label for="artist_name">Fundraiser Name</label>
+                                <input type="text" name="name" id="name" class="form-control regInput" value="{{ profile.charity.name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="goal">Goal</label>
+                                <input type="text" name="goal" id="goal" class="form-control regInput" value="{{ profile.charity.goal }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" name="country" id="country" class="form-control regInput" value="{{ profile.country }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" name="city" id="city" class="form-control regInput" value="{{ profile.city }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">Postcode</label>
+                                <input type="text" name="zip" id="zip" class="form-control regInput" value="{{ profile.zip }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" name="phone" id="phone" class="form-control regInput" value="{{ profile.phone }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="paypal">PayPal Account</label>
+                                <input type="text" name="paypal" id="paypal" class="form-control regInput" value="{{ profile.paypal }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" rows="5" class="form-control regInput">{{ profile.charity.description }}</textarea>
+
+                            </div>
+                            <div class="form-group" id="form-group-links">
+                                <label for="links">Add Link</label>
+                                <div id="LinksWrap">
+                                    {% for l in profile.weblinks %}
+                                        <div class="link" id="link{{ l.id }}">
+                                            <a href="{{ l.url }}">{{ l.url }}</a>
+                                            <a class="close-red delete-link" data-delete="{{ l.id }}" id="closeRegoCharity">&times;</a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <input type="links" name="links" id="links" class="form-control regInput">
+                                <span class="helper">
+                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Add your links here. Your band webpage, youtube channel and more.">
+                                        <i class="fa fa-question-circle"></i>
+                                    </a>
+                                </span>
+                                <span class="help-block hide">Invalid URL</span>
+                                <button type="button" id="AddLink" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                        </div>
+
+                        <div class="right-form pull-left">
+                            <div class="form-group">
+                                <label for="links">Upload picture</label>
+                                <div class="uploadbox">
+                                    <div class="profilepic pull-left">
+                                        {% if profile.picture == 0 %}
+                                            <img src="/assets//images/user.png" alt=""/>
+                                        {% else %}
+                                            <img src="/profile/picture/{{ profile.picture }}/large">
+                                        {% endif %}
+                                    </div>
+                                    <div class="btn-box pull-right text-right">
+                                        <input type="hidden" id="picture_id" name="picture_id" value="{{ profile.picture }}"/>
+                                        <input type="file" id="picture" name="picture" style="display:none;" accept="image/jpg,image/png,image/jpeg,image/gif" >
+                                        <button type="button" class="btn btn-default regBtn" id="upload-picture">Upload picture</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="saveform text-right">
+                            <button type="submit" class="btn btn-default regBtn">Save settings</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'partials/footer' %}
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="assets/javascripts/bootstrap.js"></script>
+<script src="assets/javascripts/backstretch.min.js"></script>
+<script src="assets/javascripts/bootstrap-select.min.js"></script>
+<script src="assets/javascripts/jquery.are-you-sure.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script src="/assets/javascripts/cropper.min.js"></script>
+<script src="/assets/javascripts/settings.js"></script>
+</body>
+
+</html>

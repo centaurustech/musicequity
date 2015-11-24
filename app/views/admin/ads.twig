@@ -1,0 +1,225 @@
+{% include 'admin/partials/header' %}
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirmation
+            </div>
+            <div class="modal-body">
+                Are you sure?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a href="/" class="btn btn-danger danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- start: Content -->
+<div id="content" class="col-sm-11">
+    <form action="admin/ads/post" method="post" enctype="multipart/form-data">
+        <div class="col-md-2">
+            <div class="box">
+                <div class="box-header">
+                    Box 1
+                </div>
+                <div class="box-content text-center">
+                    <img src="box/1/{{ date().timestamp }}" style="width:180px; height:auto; margin-bottom:6px"/>
+                    <input type="file" accept=".png,.gif,.jpg,.jpeg" name="box1" class="hide adsbox" id="box1"/>
+                    <input type="text" class="form-control" name="box-text1" style="width:70%; margin:0 auto;" value="{{ box[0].link }}"/>
+                    <label class="btn btn-warning" for="box1">Choose File</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="box">
+                <div class="box-header">
+                    Box 2
+                </div>
+                <div class="box-content text-center">
+                    <img src="box/2/{{ date().timestamp }}" style="width:180px; height:auto; margin-bottom:6px"/>
+                    <input type="file" accept=".png,.gif,.jpg,.jpeg" name="box2" class="hide adsbox" id="box2"/>
+                    <input type="text" class="form-control" name="box-text2" style="width:70%; margin:0 auto;" value="{{ box[1].link }}"/>
+                    <label class="btn btn-warning" for="box2">Choose File</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="box">
+                <div class="box-header">
+                    Box 3
+                </div>
+                <div class="box-content text-center">
+                    <img src="box/3/{{ date().timestamp }}" style="width:180px; height:auto; margin-bottom:6px"/>
+                    <input type="file" accept=".png,.gif,.jpg,.jpeg" name="box3" class="hide adsbox" id="box3"/>
+                    <input type="text" class="form-control" name="box-text3" style="width:70%; margin:0 auto;" value="{{ box[2].link }}"/>
+                    <label class="btn btn-warning" for="box3">Choose File</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="box">
+                <div class="box-header">
+                    Box 4
+                </div>
+                <div class="box-content text-center">
+                    <img src="box/4/{{ date().timestamp }}" style="width:180px; height:auto; margin-bottom:6px"/>
+                    <input type="file" accept=".png,.gif,.jpg,.jpeg" name="box4" class="hide adsbox" id="box4"/>
+                    <input type="text" class="form-control" name="box-text4" style="width:70%; margin:0 auto;" value="{{ box[3].link }}"/>
+                    <label class="btn btn-warning" for="box4">Choose File</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="box">
+                <div class="box-header">
+                    Box 5
+                </div>
+                <div class="box-content text-center">
+                    <img src="box/5/{{ date().timestamp }}" style="width:180px; height:auto; margin-bottom:6px"/>
+                    <input type="file" accept=".png,.gif,.jpg,.jpeg" name="box5" class="hide adsbox" id="box5"/>
+                    <input type="text" class="form-control" name="box-text5" style="width:70%; margin:0 auto;" value="{{ box[4].link }}"/>
+                    <label class="btn btn-warning" for="box5">Choose File</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <button type="submit" role="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </form>
+
+
+
+
+
+
+
+
+</div>
+<!-- end: Content -->
+
+
+</div>
+<!--/row-->
+</div>
+
+
+
+
+
+<div class="clearfix">
+</div>
+
+<footer>
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            &copy; 2014
+            <a href="https://musicequity.com">
+                Music Equity
+            </a>
+        </div>
+        <!--/.col-->
+
+        <div class="col-sm-7 text-right">
+
+        </div>
+        <!--/.col-->
+
+    </div>
+    <!--/.row-->
+
+</footer>
+
+<!-- start: JavaScript-->
+<!--[if !IE]>
+-->
+
+<script src="assets/admin/js/jquery-2.1.0.min.js">
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script src="assets/admin/js/jquery-1.11.0.min.js">
+</script>
+
+<![endif]-->
+
+<!--[if !IE]>
+-->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-2.1.0.min.js'>"+"<"+"/script>");
+</script>
+
+<!--
+<![endif]-->
+
+<!--[if IE]>
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/admin/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+</script>
+
+<![endif]-->
+<script src="assets/admin/js/jquery-migrate-1.2.1.min.js">
+</script>
+<script src="assets/admin/js/bootstrap.min.js">
+</script>
+
+
+<!-- page scripts -->
+<script src="assets/admin/js/jquery-ui-1.10.3.custom.min.js">
+</script>
+
+
+<!-- theme scripts -->
+<script src="assets/admin/js/custom.min.js">
+</script>
+<script src="assets/admin/js/core.min.js">
+</script>
+
+<script>
+    $(document).ready(function(){
+
+        function ReadData(input, elem) {
+            var box = elem.parent();
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    var image = $('<img style="max-width:170px; height:auto; margin-bottom:6px;"/>').attr('src', e.target.result);
+                    box.find('img').remove();
+                    box.prepend(image);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.danger').prop('href', $(e.relatedTarget).data('href'));
+        });
+
+        $('.adsbox').change(function(){
+            ReadData(this, $(this));
+        });
+
+    });
+</script>
+
+<!-- end: JavaScript-->
+
+</body>
+</html>
