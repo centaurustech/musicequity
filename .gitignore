@@ -2,7 +2,6 @@
 .vagrant
 Vagrantfile
 .idea
-vendor
 app/storage/temp
 app/storage/news-art
 app/storage/cache
